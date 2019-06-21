@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -45,7 +46,10 @@ namespace Blog
             {
                 options.LoginPath = "/Auth/Login";
             });
-            services.AddMvc();
+            services.AddMvc(options =>
+            {
+                options.CacheProfiles.Add("Monthly", new CacheProfile { Duration = 30 * 24 * 60 * 60 }); // 30 * 24 * 60 * 60 = 30 Days
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

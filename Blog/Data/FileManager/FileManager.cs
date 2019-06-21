@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using PhotoSauce.MagicScaler;
 
 namespace Blog.Data.FileManager
 {
@@ -56,8 +54,9 @@ namespace Blog.Data.FileManager
 
                 using (var fileStream = new FileStream(Path.Combine(savePath, fileName), FileMode.Create))
                 {
-                    await image.CopyToAsync(fileStream);
+                    MagicImageProcessor.ProcessImage(image.OpenReadStream(), fileStream, ImageOptions());
                 }
+
 
                 return fileName;
             } catch (Exception e)
@@ -66,5 +65,13 @@ namespace Blog.Data.FileManager
                 return "Error";
             }
         }
+
+        private ProcessImageSettings ImageOptions() => new ProcessImageSettings {
+            Width = 800,
+            Height = 500,
+            ResizeMode = CropScaleMode.Crop,
+            JpegQuality = 100,
+            JpegSubsampleMode = ChromaSubsampleMode.Subsample420
+        };
     }
 }

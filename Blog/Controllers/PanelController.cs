@@ -98,6 +98,13 @@ namespace Blog.Controllers
         [HttpGet]
         public async Task<IActionResult> Remove(int id)
         {
+            var post = _repo.GetPost(id);
+
+            if (!string.IsNullOrEmpty(post.Image))
+            {
+                _fileManager.RemoveImage(post.Image);
+            }
+
             _repo.RemovePost(id);
             await _repo.SaveChangesAsync();
             return RedirectToAction("Index");

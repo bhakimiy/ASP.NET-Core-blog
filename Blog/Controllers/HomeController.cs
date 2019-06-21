@@ -30,6 +30,7 @@ namespace Blog.Controllers
         }
 
         [HttpGet("/Image/{imageName}")]
+        [ResponseCache(CacheProfileName = "Monthly")]
         public IActionResult Image(string imageName)
         {
             var mime = imageName.Substring(imageName.LastIndexOf('.') + 1);
