@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Post>
+
+@{ 
+
+}
+
+<h2>Home Page!</h2>
+
+<div>
+    <ul>
+        @foreach (var post in Model)
+        {
+            <li>
+                @post.Title
+                -
+                <a asp-action="Edit" asp-route-id="@post.Id">Edit</a>
+                -
+                <a asp-action="Remove" asp-route-id="@post.Id">Remove</a>
+            </li>
+        }
+    </ul>
+</div>

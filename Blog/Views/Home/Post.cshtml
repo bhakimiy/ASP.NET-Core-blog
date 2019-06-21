@@ -1,0 +1,21 @@
+﻿@model Post
+
+@{ 
+    ViewBag.Title = Model.Title;
+    ViewBag.Description = Model.Description;
+    ViewBag.Keywords = $"{Model.Tags?.Replace(","," ")} {Model.Category}";
+}
+
+<div class="container">
+    <div class="post no-shadow">
+        @if (!String.IsNullOrEmpty(Model.Image))
+        {
+            var image_path = @Url.Action("Image", new { imageName = Model.Image });
+            <img src="@image_path" />
+            <span class="title">@Model.Title</span>
+        }
+    </div>
+    <div class="post-body">
+        @Html.Raw(Model.Body)
+    </div>
+</div>

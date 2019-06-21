@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Post>
+
+@{ 
+    ViewBag.Title = "Blog Website";
+    ViewBag.Description = "This simple Blog made in ASP.Net Core";
+    ViewBag.Keywords = "blog programming travel photography";
+}
+
+
+<div class="main-img">
+    <span class="title">Web Blog Made in ASP.NET Core</span>
+</div>
+
+<div class="container">
+    @foreach (var post in Model)
+    {
+        <a class="post" asp-controller="Home" asp-action="Post" asp-route-id="@post.Id">
+            @if (!String.IsNullOrEmpty(post.Image))
+            {
+                var image_path = @Url.Action("Image", new { imageName = post.Image });
+                <img src="@image_path" width="500" />
+            }
+        <span class="title">@post.Title</span>
+        </a>
+
+    }
+</div>
