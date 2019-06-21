@@ -12,5 +12,6 @@ namespace Blog.Data.FileManager
     {
         FileStream ImageStream(string imageName);
         Task<string> SaveImageAsync(IFormFile image);
+        bool RemoveImage(string image);
     }
 }

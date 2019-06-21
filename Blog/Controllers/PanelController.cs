@@ -69,6 +69,10 @@ namespace Blog.Controllers
                 post.Image = postVM.CurrentImage;
             } else
             {
+                if (!string.IsNullOrEmpty(postVM.CurrentImage))
+                {
+                    _fileManager.RemoveImage(postVM.CurrentImage);
+                }
                 post.Image = await _fileManager.SaveImageAsync(postVM.Image);
             }
 

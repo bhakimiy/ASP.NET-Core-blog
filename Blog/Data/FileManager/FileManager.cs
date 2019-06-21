@@ -23,6 +23,24 @@ namespace Blog.Data.FileManager
             return new FileStream(Path.Combine(_imagePath, imageName), FileMode.Open, FileAccess.Read);
         }
 
+        public bool RemoveImage(string image)
+        {
+            try
+            { 
+                var file = Path.Combine(_imagePath, image);
+                if (File.Exists(file))
+                {
+                    File.Delete(file);
+                }
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+
         public async Task<string> SaveImageAsync(IFormFile image)
         {
             try
