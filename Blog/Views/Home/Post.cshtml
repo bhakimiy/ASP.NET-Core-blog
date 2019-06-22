@@ -18,4 +18,26 @@
     <div class="post-body">
         @Html.Raw(Model.Body)
     </div>
+    <div class="comment-section post-body">
+        <h2>Comments:</h2>
+        <partial name="_MainComment" model="@new CommentViewModel { PostId = Model.Id, MainCommentId = 0}" />
+
+        @foreach(var c in Model.MainComments)
+        { 
+            <p>
+                @c.Message --- @c.Created
+            </p>
+
+            <div style="margin-left: 20px;">
+                <h4>Sub Comments</h4>
+                <partial name="_MainComment" model="@new CommentViewModel { PostId = Model.Id, MainCommentId = c.Id}" />
+                @foreach (var sc in c.SubComments)
+                {
+                    <p>
+                        @sc.Message --- @sc.Created
+                    </p>
+                }
+            </div>
+        }
+    </div>
 </div>

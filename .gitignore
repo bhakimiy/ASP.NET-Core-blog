@@ -4,7 +4,7 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 #Ignore appsettings for Production build
-appsettings.production.Development.json
+Blog/appsettings.production.json
 
 # User-specific files
 *.rsuser
